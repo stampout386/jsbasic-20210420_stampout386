@@ -1,12 +1,7 @@
-function showSalary(users, age){
+function showSalary(users, ageIn){
   return users
-  .filter(item => item.age <= age )
-  .map(item => `${item.name}, ${item.balance}`)
+  .filter(({age}) => age <= ageIn)
+  .map(({name, balance}) => `${name}, ${balance}`)
   .join('\n');
-
-  // let filterAge = users.filter(item => item.age <= age );
-
-  // return filterAge.map(item => `${item.name}, ${item.balance}`).join('\n'); // можно все одной строкой но это слишком длинно на мой взгляд
-  
 
 }

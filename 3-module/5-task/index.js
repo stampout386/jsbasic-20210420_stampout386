@@ -1,5 +1,7 @@
+const REGEX = /[\s,]+/;
+
 function getMinMax(str) {
-  let strNumber = str.split(/[\s,]+/).map(item => isFinite(item) ? item : '');
+  const strNumber = str.split(REGEX).filter(item => isFinite(item));
     
     return {
         min : Math.min(...strNumber),
