@@ -1,5 +1,3 @@
-const table = document.querySelector('.js-teachers');
-
 function highlight(table) {
   const tr = table.rows;
 
@@ -12,8 +10,13 @@ function highlight(table) {
       } else {
           tr[i].setAttribute('hidden', false)
       };
-
-        td[2].innerHTML === 'm' ? tr[i].classList.add('male') : tr[i].classList.add('female');
-        td[1].innerHTML < 18 ? tr[i].style = "text-decoration: line-through" : null;
+        if(td[2].innerHTML === 'm') {
+          tr[i].classList.add('male')}
+        if(td[2].innerHTML === 'f') {
+          tr[i].classList.add('female')
+        };
+        if(td[1].innerHTML < 18) {
+          tr[i].style = "text-decoration: line-through"
+      };
   }
 }

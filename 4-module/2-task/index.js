@@ -1,10 +1,8 @@
-const tableDiagonal = document.querySelector('table');
+function makeDiagonalRed(table) {
 
-function makeDiagonalRed(tableDiagonal) {
-
-    for (let i = 0; i < tableDiagonal.rows.length; i++) {
+    for (let i = 0; i < table.rows.length; i++) {
         
-        let row = tableDiagonal.rows[i];
+        let row = table.rows[i];
         row.cells[i].style.backgroundColor = 'red';
         
     }
