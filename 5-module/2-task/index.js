@@ -4,9 +4,9 @@ function toggleText() {
   
   button.addEventListener('click', () => {
       if (removeDiv.hasAttribute('hidden')) {
-          removeDiv.removeAttribute('hidden');
+          removeDiv.hidden = false;
       } else {
-           removeDiv.setAttribute('hidden', true);
+           removeDiv.hidden = true;
       }
   })
 

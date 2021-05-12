@@ -8,32 +8,35 @@ function initCarousel() {
   if (posX === 0 ) {
     buttonLeft.style.display = 'none';
   } 
+ buttonLeft.addEventListener('click', carouselEventLeft );
+ buttonRight.addEventListener('click', carouselEventRight );
+
+ function carouselEventLeft(){
+  posX = posX + carouselDiv.offsetWidth;
+  carouselDiv.style.transform = `translateX(${posX}px)`;
   
+  if (posX === 0) {
+    buttonLeft.style.display = 'none';
+  } else {
+    buttonRight.style.display = '';
+    
+  }
+   
+ }
+ 
+ function carouselEventRight(){
+  posX = posX - carouselDiv.offsetWidth;
+  carouselDiv.style.transform = `translateX(${posX}px)`;
+  
+  if (posX === - (carouselSlide.length - 1) * carouselDiv.offsetWidth) {
+    buttonRight.style.display = 'none';
+  } else {
+    buttonLeft.style.display = '';
+  }
+   
+ }
+ 
 
-  buttonLeft.addEventListener('click', () => {
-    
-    posX = posX + carouselDiv.offsetWidth;
-    carouselDiv.style.transform = `translateX(${posX}px)`;
-    
-    if (posX === 0) {
-      buttonLeft.style.display = 'none';
-    } else {
-      buttonRight.style.display = '';
-      
-    }
-    
-  });
-
-  buttonRight.addEventListener('click', () => {
-    posX = posX - carouselDiv.offsetWidth;
-    carouselDiv.style.transform = `translateX(${posX}px)`;
-    
-    if (posX === - (carouselSlide.length - 1) * carouselDiv.offsetWidth) {
-      buttonRight.style.display = 'none';
-    } else {
-      buttonLeft.style.display = '';
-    }
-
-  });
+  
 }
 
