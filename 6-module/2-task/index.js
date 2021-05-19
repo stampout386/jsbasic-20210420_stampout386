@@ -26,12 +26,10 @@ export default class ProductCard {
     this.button.addEventListener('click', () => this.onClick());  
   }
   onClick() {
-     const buttonCard = this.button;
      const onButtonCustomClick = new CustomEvent('product-add',
      { detail: this.id,
        bubbles: true 
      });
-     buttonCard.dispatchEvent(onButtonCustomClick);
-    
-  }
+     this.elem.dispatchEvent(onButtonCustomClick);
+  };
 }
