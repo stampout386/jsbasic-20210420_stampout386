@@ -17,8 +17,7 @@ export default class Carousel {
   </div>
     `;
     let slideInner = this.slides.map(slide =>{
-     return `
-<div class="carousel__slide" data-id="${slide.id}">
+     return `<div class="carousel__slide" data-id="${slide.id}">
   <img src="/assets/images/carousel/${slide.image}" class="carousel__img" alt="slide">
   <div class="carousel__caption">
     <span class="carousel__price">€${slide.price.toFixed(2)}</span>
@@ -27,8 +26,7 @@ export default class Carousel {
       <img src="/assets/images/icons/plus-icon.svg" alt="icon">
     </button>
   </div>
-</div>
-     `
+</div>`
     })
     .join('');
 
@@ -81,8 +79,7 @@ export default class Carousel {
   }
   onClick(event) {
 
-  let slide = {id : event.target.offsetParent.offsetParent.dataset.id};
-  console.log(slide.id);
+  let slide = {id : event.target.closest('.carousel__slide').dataset.id};
   const buttonSlideCustomClick = new CustomEvent("product-add", { detail: slide.id, bubbles: true });
    this.elem.dispatchEvent(buttonSlideCustomClick);
  }
