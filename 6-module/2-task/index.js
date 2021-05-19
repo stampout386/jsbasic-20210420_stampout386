@@ -1,12 +1,5 @@
 import createElement from '../../assets/lib/create-element.js';
 
-let product = {
-  name: "Laab kai chicken salad", // название товара
-  price: 10, // цена товара
-  category: "salads", // категория, к которой он относится, нам это понадобится чуть позже
-  image: "laab_kai_chicken_salad.png", // название картинки товара
-  id: "laab-kai-chicken-salad" // уникальный идентификатор товара, нужен для добавления товара в корзину
-}
 
 export default class ProductCard {
   constructor(product) {
@@ -41,14 +34,4 @@ export default class ProductCard {
      buttonCard.dispatchEvent(onButtonCustomClick);
     
   }
-
-  // buttonEvent(){
-  //   const cartButton = document.querySelector('.card__button');
-  //   cartButton.addEventListener('click', this._onButtonClick);
-  // }
-  // _onButtonClick(){
-     
-  // }
-  
-  
 }
