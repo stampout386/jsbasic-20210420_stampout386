@@ -81,13 +81,10 @@ export default class Carousel {
   }
   onClick(event) {
 
-  let slideId = event.target.offsetParent.offsetParent.dataset.id;
-  console.log(slideId);
-  const buttonSlideCustomClick = new CustomEvent("product-add", { 
-    detail: slideId, 
-    bubbles: true 
-   });
-   this.button.dispatchEvent(buttonSlideCustomClick);
+  let slide = {id : event.target.offsetParent.offsetParent.dataset.id};
+  console.log(slide.id);
+  const buttonSlideCustomClick = new CustomEvent("product-add", { detail: slide.id, bubbles: true });
+   this.elem.dispatchEvent(buttonSlideCustomClick);
  }
 
 };
