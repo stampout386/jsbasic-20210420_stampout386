@@ -27,7 +27,6 @@ export default class ProductCard {
 
 
  _onClick = () => {
-    console.log('work')
     const onButtonCustomClick = new CustomEvent('product-add',
      { detail: this._id,
        bubbles: true 
