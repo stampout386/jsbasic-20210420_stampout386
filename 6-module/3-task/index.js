@@ -81,10 +81,10 @@ export default class Carousel {
     
     divCarouselSlide.forEach(slide => {
       this.button = slide.querySelector('.carousel__button');
-      this.button.addEventListener('click', (event) => this.onClick(event)); 
+      this.button.addEventListener('click', (event) => this._onClick(event)); 
     })
   }
-  onClick(event) {
+  _onClick(event) {
   let slide = {id : event.target.closest('.carousel__slide').dataset.id};
   const buttonSlideCustomClick = new CustomEvent("product-add", { detail: slide.id, bubbles: true });
    this.elem.dispatchEvent(buttonSlideCustomClick);
