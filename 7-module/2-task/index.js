@@ -2,9 +2,12 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
   constructor() {
-    
+    this.modalDiv = createElement(this._render());
+    this.button = this._close();
+    this.key = this._closeEscape();
   }
-open(){ 
+
+_render(){
   return `<div class="modal">
   
   <div class="modal__overlay"></div>
@@ -17,23 +20,42 @@ open(){
       </button>
 
       <h3 class="modal__title">
-        ${this.setTitle}
       </h3>
     </div>
 
     <div class="modal__body">
-      ${this.setBody}
     </div>
   </div>
 
 </div>`
-
+}  
+open(){ 
+document.body.append(this.modalDiv);
+document.body.classList.add('is-modal-open')
 } 
 setTitle(titlle){
-  return this.elem.querySelector('.modal__title').innerHTML = titlle;
+  this.modalDiv.querySelector('.modal__title').innerHTML = titlle;
 
-}
+ }
 setBody(html){
-  return this.elem.querySelector('.modal__body').innerHTML = html;
+  this.modalDiv.querySelector('.modal__body').append(html);
+ }
+
+_close(){
+  this.modalDiv.querySelector('.modal__close').addEventListener('click', this._modalClose);
+  
+} 
+_closeEscape(){
+  document.addEventListener('keydown', this._keyDownClose)
 }
+
+_keyDownClose=(event)=>{
+  if(event.code === 'Escape'){
+    this.modalDiv.remove();
+  } 
+}
+
+_modalClose = () =>{
+  this.modalDiv.remove();
+ }
 }
