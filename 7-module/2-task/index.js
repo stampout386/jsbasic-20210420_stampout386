@@ -52,10 +52,12 @@ _closeEscape(){
 _keyDownClose=(event)=>{
   if(event.code === 'Escape'){
     this.modalDiv.remove();
+    document.body.classList.remove('is-modal-open')
   } 
 }
 
 _modalClose = () =>{
   this.modalDiv.remove();
+  document.body.classList.remove('is-modal-open')
  }
 }
