@@ -3,8 +3,9 @@ import createElement from '../../assets/lib/create-element.js';
 export default class Modal {
   constructor() {
     this.modalDiv = createElement(this._render());
-    this.button = this._close();
+    this.button = this.close();
     this.key = this._closeEscape();
+    console.log(this.modalDiv)
   }
 
 _render(){
@@ -20,11 +21,12 @@ _render(){
       </button>
 
       <h3 class="modal__title">
+       ${this.setTitle}
       </h3>
     </div>
-
     <div class="modal__body">
-    </div>
+    
+  </div>
   </div>
 
 </div>`
@@ -38,11 +40,16 @@ setTitle(titlle){
 
  }
 setBody(html){
-  this.modalDiv.querySelector('.modal__body').append(html);
- }
+  let modalBody = document.createElement('div');
+  modalBody.append(html);
+  this.modalDiv.querySelector('.modal__body').append(modalBody);
+}
 
-_close(){
+close(){
   this.modalDiv.querySelector('.modal__close').addEventListener('click', this._modalClose);
+  
+  document.body.classList.remove('is-modal-open')
+  this.modalDiv.remove();
   
 } 
 _closeEscape(){
