@@ -43,13 +43,17 @@ export default class StepSlider {
           }
         document.addEventListener('pointermove', onMove,);
         document.addEventListener('pointerup', ()=>{
+            
             document.removeEventListener('pointermove', onMove)
             this.elem.classList.remove('slider_dragging')
+            
+            const valueSl = this.elem.querySelector('.slider__value').textContent;
             const drugCustomEvent = new CustomEvent('slider-change', { 
-              detail: this.value,
-              bubbles: true 
-            })
-            this.elem.dispatchEvent(drugCustomEvent)
+            detail: +valueSl,
+            bubbles: true 
+          })
+          this.elem.dispatchEvent(drugCustomEvent);
+            
           },{once: true})
         })
         
