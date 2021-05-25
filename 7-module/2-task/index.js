@@ -5,7 +5,6 @@ export default class Modal {
     this.modalDiv = createElement(this._render());
     this.button = this.close();
     this.key = this._closeEscape();
-    console.log(this.modalDiv)
   }
 
 _render(){
@@ -53,7 +52,7 @@ close(){
   
 } 
 _closeEscape(){
-  document.addEventListener('keydown', this._keyDownClose, { once : true})
+  document.addEventListener('keydown', this._keyDownClose,{ once : true})
 }
 
 _keyDownClose=(event)=>{
