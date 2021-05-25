@@ -53,7 +53,7 @@ close(){
   
 } 
 _closeEscape(){
-  document.addEventListener('keydown', this._keyDownClose)
+  document.addEventListener('keydown', this._keyDownClose, { once : true})
 }
 
 _keyDownClose=(event)=>{
