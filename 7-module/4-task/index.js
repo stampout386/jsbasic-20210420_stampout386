@@ -17,10 +17,13 @@ _onPointerDown(){
 }
 _onPointerMove=(event)=>{
   this.elem.classList.add('slider_dragging');
-  let left = event.clientX - this.elem.getBoundingClientRect().left;  
+ 
+  
+    let left = event.clientX - this.elem.getBoundingClientRect().left;  
+  
     let leftRelative = left / this.elem.offsetWidth;
     let thumb = this.elem.querySelector('.slider__thumb');
-     
+    
     if (leftRelative < 0) {
      leftRelative = 0;
      }
@@ -30,23 +33,57 @@ _onPointerMove=(event)=>{
      }
 
       let leftPercents = leftRelative * 100;
+      
       let progress = this.elem.querySelector('.slider__progress');
-
-      thumb.style.left = `${leftPercents}%`;
-      progress.style.width = `${leftPercents}%`;  
       
       let segments = this.steps - 1;
       let approximateValue = leftRelative * segments;
       let value = Math.round(approximateValue);
+      
+
+      thumb.style.left = `${leftPercents}%`;
+      progress.style.width = `${leftPercents}%`;  
+      
       this.elem.querySelector('.slider__value').innerHTML = value;
-  document.addEventListener('pointermove', this._onPointerMove);
-  document.addEventListener('pointerup', this._onPointerUp,{once: true});
+
+      let divSteps = this.elem.querySelector('.slider__steps');
+      let arrSteps = [...divSteps.querySelectorAll('span')];
+      for (let i = 0; i < arrSteps.length; i++) {
+      arrSteps[i].classList.remove('slider__step-active')
+      if(value ===  i){arrSteps[i].classList.add('slider__step-active');}
+      }
+      
+      document.addEventListener('pointermove', this._onPointerMove);
+      document.addEventListener('pointerup', this._onPointerUp,{once: true});
 
 }
-_onPointerUp=()=>{
+_onPointerUp=(event)=>{
   document.removeEventListener('pointermove', this._onPointerMove)
   this.elem.classList.remove('slider_dragging')
-            
+  
+  let left = event.clientX - this.elem.getBoundingClientRect().left; 
+  let leftRelative = left / this.elem.offsetWidth;  
+  
+  if (leftRelative < 0) {
+    leftRelative = 0;
+    }
+
+    if (leftRelative > 1) {
+    leftRelative = 1;
+    }
+
+      let segments = this.steps - 1;
+      let approximateValue = leftRelative * segments;
+      let value = Math.round(approximateValue);
+      let valuePercents = value / segments * 100;
+
+      let thumb = this.elem.querySelector('.slider__thumb');
+      let progress = this.elem.querySelector('.slider__progress');
+      thumb.style.left = `${valuePercents}%`;
+      progress.style.width = `${valuePercents}%`;
+
+
+
             const valueSl = this.elem.querySelector('.slider__value').textContent;
             const drugCustomEvent = new CustomEvent('slider-change', { 
             detail: +valueSl,
