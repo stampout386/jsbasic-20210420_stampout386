@@ -3,8 +3,9 @@ import createElement from '../../assets/lib/create-element.js';
 export default class Modal {
   constructor() {
     this.modalDiv = createElement(this._render());
-    this.button = this.close();
-    this.key = this._closeEscape();
+    this._closeClick();
+    this._closeEscape();
+    
   }
 
 _render(){
@@ -43,13 +44,13 @@ setBody(html){
   modalBody.append(html);
   this.modalDiv.querySelector('.modal__body').append(modalBody);
 }
-
-close(){
-  this.modalDiv.querySelector('.modal__close').addEventListener('click', this._modalClose);
-  
-  document.body.classList.remove('is-modal-open')
+_closeClick(){
+  this.modalDiv.querySelector('.modal__close').addEventListener('click', this.close); 
+}
+close = () => {
+   
   this.modalDiv.remove();
-  
+  document.body.classList.remove('is-modal-open')
 } 
 _closeEscape(){
   document.addEventListener('keydown', this._keyDownClose,{ once : true})
@@ -62,8 +63,8 @@ _keyDownClose=(event)=>{
   } 
 }
 
-_modalClose = () =>{
-  this.modalDiv.remove();
-  document.body.classList.remove('is-modal-open')
- }
+// _modalClose = () =>{
+//   this.modalDiv.remove();
+//   document.body.classList.remove('is-modal-open')
+//  }
 }
