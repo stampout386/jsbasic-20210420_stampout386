@@ -6,7 +6,7 @@ export default class ProductGrid {
     this.products = products;
     this.filters = {};
     this.elem = createElement(this._render());
-    this._renderCard(this.products)
+    this._renderCard()
   }
 _render(){
   return `<div class="products-grid">
@@ -15,9 +15,9 @@ _render(){
 </div>`
 }
 
-_renderCard(prod){
+_renderCard(){
   let gridDiv = this.elem.querySelector('.products-grid__inner')
-  prod.forEach(element => {
+  this.products.forEach(element => {
     const card = new ProductCard(element);
     gridDiv.append(card.elem);
   });
@@ -25,17 +25,49 @@ _renderCard(prod){
 updateFilter(filters){
   if (filters.noNuts){
    const nuts = this.products.filter(item => !item.nuts)
-  return this.products = nuts;
+   this.elem.querySelector('.products-grid__inner').innerHTML ='';
+   nuts.forEach(element => {
+    const card = new ProductCard(element);
+    this.elem.querySelector('.products-grid__inner').append(card.elem);
+  });
+  console.log(nuts)
 }
-if (filters.vegeterianOnly){
+  if (filters.vegeterianOnly){
   const vegeterian = this.products.filter(item => item.vegeterian)
-  console.log(vegeterian)
-  console.log(this.elem.querySelectorAll('.card'))
-  this._renderCard(vegeterian);
-}
   
+  this.elem.querySelector('.products-grid__inner').innerHTML ='';
+ 
+  vegeterian.forEach(element => {
+    const card = new ProductCard(element);
+    this.elem.querySelector('.products-grid__inner').append(card.elem);
+  });
   
 }
+  if(filters.maxSpiciness){
+    const maxSpiciness = this.products.filter(item => item.spiciness <= filters.maxSpiciness)
+    
+    this.elem.querySelector('.products-grid__inner').innerHTML ='';
+    
+    maxSpiciness.forEach(element => {
+      const card = new ProductCard(element);
+      this.elem.querySelector('.products-grid__inner').append(card.elem);
+    });
+ }
+  if(filters.category){
+    const category = this.products.filter(item => item.category === filters.category)
+    console.log(category)
+
+    this.elem.querySelector('.products-grid__inner').innerHTML ='';
+    
+    category.forEach(element => {
+      const card = new ProductCard(element);
+      this.elem.querySelector('.products-grid__inner').append(card.elem);
+    });
+  } 
+  
+
+  
+   }
 
 
 
