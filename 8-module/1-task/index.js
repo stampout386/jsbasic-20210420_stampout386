@@ -20,7 +20,7 @@ export default class CartIcon {
           <span class="cart-icon__count">${cart.getTotalCount()}</span>
           <span class="cart-icon__price">€${cart.getTotalPrice().toFixed(2)}</span>
         </div>`;
-
+      
       this.updatePosition();
 
       this.elem.classList.add('shake');
@@ -36,7 +36,7 @@ export default class CartIcon {
   addEventListeners() {
     document.addEventListener('scroll', () => this.updatePosition());
     window.addEventListener('resize', () => this.updatePosition());
-    //this.initialTopCoord = this.elem.getBoundingClientRect().top + window.pageYOffset;
+    
     
   }
 
@@ -47,7 +47,7 @@ export default class CartIcon {
       document.querySelector('.container').getBoundingClientRect().right + 20,
       document.documentElement.clientWidth - this.elem.offsetWidth - 10
     ) + 'px';
-    let initialTopCoord = 50;
+    let initialTopCoord = this.elem.getBoundingClientRect().top + pageYOffset;
     if (window.pageYOffset > initialTopCoord) {
       Object.assign(this.elem.style, {
         position: 'fixed',
