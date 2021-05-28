@@ -23,53 +23,23 @@ _renderCard(){
   });
 }
 updateFilter(filters){
-  if (filters.noNuts){
-   const nuts = this.products.filter(item => !item.nuts)
-   this.elem.querySelector('.products-grid__inner').innerHTML ='';
-   nuts.forEach(element => {
-    const card = new ProductCard(element);
+  
+  Object.assign(this.filters, filters);
+    this.renderContent();
+
+  }
+
+renderContent(){
+  this.elem.querySelector('.products-grid__inner').innerHTML = '';
+  for (let product of this.products) {
+    if (this.filters.noNuts && product.nuts) {continue;}
+    if (this.filters.vegeterianOnly && !product.vegeterian) {continue;}
+    if (this.filters.maxSpiciness !== undefined && product.spiciness > this.filters.maxSpiciness) {continue;}
+    if (this.filters.category && product.category != this.filters.category) {continue;}
+    const card = new ProductCard(product); 
     this.elem.querySelector('.products-grid__inner').append(card.elem);
-  });
-  console.log(nuts)
+     } 
+  }    
 }
-  if (filters.vegeterianOnly){
-  const vegeterian = this.products.filter(item => item.vegeterian)
-  
-  this.elem.querySelector('.products-grid__inner').innerHTML ='';
- 
-  vegeterian.forEach(element => {
-    const card = new ProductCard(element);
-    this.elem.querySelector('.products-grid__inner').append(card.elem);
-  });
-  
-}
-  if(filters.maxSpiciness){
-    const maxSpiciness = this.products.filter(item => item.spiciness <= filters.maxSpiciness)
-    
-    this.elem.querySelector('.products-grid__inner').innerHTML ='';
-    
-    maxSpiciness.forEach(element => {
-      const card = new ProductCard(element);
-      this.elem.querySelector('.products-grid__inner').append(card.elem);
-    });
- }
-  if(filters.category){
-    const category = this.products.filter(item => item.category === filters.category)
-    console.log(category)
-
-    this.elem.querySelector('.products-grid__inner').innerHTML ='';
-    
-    category.forEach(element => {
-      const card = new ProductCard(element);
-      this.elem.querySelector('.products-grid__inner').append(card.elem);
-    });
-  } 
-  
-
-  
-   }
 
 
-
-
-}
