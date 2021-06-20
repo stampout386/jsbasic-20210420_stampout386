@@ -9,11 +9,15 @@ export default class StepSlider {
   }
 
   _render(){
+    let segments = this.steps - 1;
+    let valuePercents = this.value / segments * 100;
+
+
     return `<div class="slider">
-    <div class="slider__thumb">
-      <span class="slider__value">0</span>
+    <div class="slider__thumb" style="left:${valuePercents}%">
+      <span class="slider__value">${this.value}</span>
     </div>
-    <div class="slider__progress"></div>
+    <div class="slider__progress" style="width:${valuePercents}%"></div>
     <div class="slider__steps">
        ${this._renderSliderSteps()}
     </div>
@@ -21,11 +25,16 @@ export default class StepSlider {
   }
 
  _renderSliderSteps(){
-    let stepsSpan = '<span class = "slider__step-active"></span>';
+    let stepsSpan = '';
     for (let i = 0; i < this.steps-1; i++) {
-      stepsSpan += `<span></span>`
+      if(i === this.value){
+        stepsSpan += `<span class ='slider__step-active'></span>`
       }
-      
+      stepsSpan += `<span></span>`
+    }
+     
+    console.log(stepsSpan)
+
       return stepsSpan;
   }
 

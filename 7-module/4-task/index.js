@@ -1,7 +1,7 @@
 import createElement from '../../assets/lib/create-element.js';
 
 export default class StepSlider {
-  constructor({ steps, value = 0 }) {
+  constructor({ steps, value }) {
      this.steps = steps;
      this.value = value;
      this.elem = createElement(this._render());
@@ -96,11 +96,16 @@ _onPointerUp=(event)=>{
  
 
   _render(){
+    
+    let segments = this.steps - 1;
+    let valuePercents = this.value / segments * 100;
+
+
     return `<div class="slider">
-    <div class="slider__thumb">
-      <span class="slider__value">0</span>
+    <div class="slider__thumb" style="left:${valuePercents}%">
+      <span class="slider__value">${this.value}</span>
     </div>
-    <div class="slider__progress"></div>
+    <div class="slider__progress" style="width:${valuePercents}%"></div>
     <div class="slider__steps">
        ${this._renderSliderSteps()}
     </div>
@@ -108,12 +113,17 @@ _onPointerUp=(event)=>{
   }
 
  _renderSliderSteps(){
-    let stepsSpan = '<span class = "slider__step-active"></span>';
-    for (let i = 0; i < this.steps-1; i++) {
-      stepsSpan += `<span></span>`
-      }
-      
-      return stepsSpan;
+  let stepsSpan = '';
+  for (let i = 0; i < this.steps-1; i++) {
+    if(i === this.value){
+      stepsSpan += `<span class ='slider__step-active'></span>`
+    }
+    stepsSpan += `<span></span>`
+  }
+   
+  console.log(stepsSpan)
+
+    return stepsSpan;
   }
 
 _sliderClick(){

@@ -36,7 +36,6 @@ renderContent(){
     if (this.filters.vegeterianOnly && !product.vegeterian) {continue;}
     if (this.filters.maxSpiciness !== undefined && product.spiciness > this.filters.maxSpiciness) {continue;}
     if (this.filters.category && product.category != this.filters.category) {continue;}
-    console.log(product)
     const card = new ProductCard(product); 
     this.elem.querySelector('.products-grid__inner').append(card.elem);
      } 

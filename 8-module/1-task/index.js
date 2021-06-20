@@ -31,6 +31,7 @@ export default class CartIcon {
     } else {
       this.elem.classList.remove('cart-icon_visible');
     }
+    
   }
 
   addEventListeners() {
@@ -41,40 +42,31 @@ export default class CartIcon {
   }
 
   updatePosition() {
-    
-    
+    if(this.elem.offsetWidth && this.elem.offsetHeight){
     let leftIndent = Math.min(
       document.querySelector('.container').getBoundingClientRect().right + 20,
       document.documentElement.clientWidth - this.elem.offsetWidth - 10
     ) + 'px';
-    let initialTopCoord = this.elem.getBoundingClientRect().top + pageYOffset;
-    if (window.pageYOffset > initialTopCoord) {
-      Object.assign(this.elem.style, {
-        position: 'fixed',
-        top: '50px',
-        zIndex: 1e3,
-        right: '10px',
-        left: leftIndent
-      });
-    } else {
-      Object.assign(this.elem.style, {
-        position: '',
-        top: '',
-        left: '',
-        zIndex: ''
-      });
-    }
 
-    if (document.documentElement.clientWidth <= 767) {
+    let initialTopCoord = 50;
+    if(window.pageYOffset > initialTopCoord){
       Object.assign(this.elem.style, {
-        position: '',
-        top: '',
-        left: '',
-        zIndex: ''
-      });
+            position: 'fixed',
+            top: '50px',
+            zIndex: 1e3,
+            right: '10px',
+            left: leftIndent
+          });
+    }  else {
       
+      Object.assign(this.elem.style, {
+      position: '',
+      top: '',
+      left: '',
+      zIndex: ''
+    });
+  
+           } 
+        }
     }
-    
-    
-  }
 }
